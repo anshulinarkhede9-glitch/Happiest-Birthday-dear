@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 Happy Birthday Bestie! 💋✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff69b4 0%, #ffb6d9 50%, #ffc0cb 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Lip Kisses Background Animation */
+        .lips-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .lip {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.6;
+            animation: float 6s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 800px;
+            height: 90vh;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        /* Slide Container */
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            text-align: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide img {
+            max-width: 90%;
+            max-height: 60%;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(255, 105, 180, 0.3);
+            margin-bottom: 30px;
+            object-fit: cover;
+        }
+
+        .message {
+            font-size: 1.5rem;
+            color: #ff1493;
+            font-weight: bold;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        .emoji-text {
+            font-size: 2.5rem;
+            margin: 15px 0;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Controls */
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            gap: 20px;
+            z-index: 20;
+        }
+
+        button {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .slide-indicator {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 105, 180, 0.3);
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background: #ff1493;
+            transform: scale(1.2);
+        }
+
+        /* Floating Hearts */
+        .heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 5;
+            animation: rise 4s ease-in forwards;
+        }
+
+        @keyframes rise {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+            }
+        }
+
+        /* Title */
+        .title {
+            position: absolute;
+            top: 30px;
+            font-size: 2rem;
+            color: #ff1493;
+            font-weight: bold;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 105, 180, 0.8);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                height: 80vh;
+            }
+
+            .message {
+                font-size: 1.2rem;
+            }
+
+            .emoji-text {
+                font-size: 2rem;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Lip Kisses Background -->
+    <div class="lips-background" id="lipsBackground"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="title">🎂 Happy Birthday Bestie! 💋✨</div>
+
+        <!-- Slides -->
+        <div class="slide-container">
+            <!-- Slide 1 -->
+            <div class="slide active">
+                <div class="emoji-text">🎉 🎊 🎈</div>
+                <div class="message">
+                    Happy Birthday to my Amazing Bestfriend! 💕<br>
+                    <span style="font-size: 1.2rem; margin-top: 20px; display: inline-block;">
+                        Let's celebrate YOU today! 🌟
+                    </span>
+                </div>
+            </div>
+
+            <!-- Slide 2 - Photo Slide -->
+            <div class="slide">
+                <img src="https://photos.app.goo.gl/muLFQVoYhUyosszC8" alt="Memory 1">
+                <div class="message">
+                    Look at this beautiful moment! 😍<br>
+                    You light up every room! ✨
+                </div>
+            </div>
+
+            <!-- Slide 3 - Photo Slide -->
+            <div class="slide">
+                <img src="https://photos.app.goo.gl/muLFQVoYhUyosszC8" alt="Memory 2">
+                <div class="message">
+                    Best memories are made with you! 💖<br>
+                    Forever grateful for your friendship! 🌹
+                </div>
+            </div>
+
+            <!-- Slide 4 - Photo Slide -->
+            <div class="slide">
+                <img src="https://photos.app.goo.gl/muLFQVoYhUyosszC8" alt="Memory 3">
+                <div class="message">
+                    You're not just my bestie, you're my vibe! 💫<br>
+                    Let's create more memories! 🎶
+                </div>
+            </div>
+
+            <!-- Slide 5 - Final Message -->
+            <div class="slide">
+                <div class="emoji-text">💋 💋 💋</div>
+                <div class="message">
+                    You deserve all the happiness in the world! 🌈<br>
+                    <span style="font-size: 1.3rem; margin-top: 20px; display: inline-block;">
+                        Happy Birthday, My Love! 💕✨🎂
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="slide-indicator">
+            <div class="dot active" onclick="currentSlide(0)"></div>
+            <div class="dot" onclick="currentSlide(1)"></div>
+            <div class="dot" onclick="currentSlide(2)"></div>
+            <div class="dot" onclick="currentSlide(3)"></div>
+            <div class="dot" onclick="currentSlide(4)"></div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button onclick="prevSlide()">← Back</button>
+            <button onclick="nextSlide()">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        // Generate floating lips background
+        function generateLips() {
+            const lipsBackground = document.getElementById('lipsBackground');
+            const lips = ['💋', '👄', '💋'];
+            
+            for (let i = 0; i < 30; i++) {
+                const lip = document.createElement('div');
+                lip.className = 'lip';
+                lip.textContent = lips[Math.floor(Math.random() * lips.length)];
+                lip.style.left = Math.random() * 100 + '%';
+                lip.style.top = Math.random() * 100 + '%';
+                lip.style.animationDelay = Math.random() * 6 + 's';
+                lip.style.animationDuration = (4 + Math.random() * 4) + 's';
+                lipsBackground.appendChild(lip);
+            }
+        }
+
+        // Navigate to specific slide
+        function currentSlide(n) {
+            showSlide(n);
+        }
+
+        // Next slide
+        function nextSlide() {
+            showSlide((currentIndex + 1) % totalSlides);
+        }
+
+        // Previous slide
+        function prevSlide() {
+            showSlide((currentIndex - 1 + totalSlides) % totalSlides);
+        }
+
+        // Show slide
+        function showSlide(n) {
+            currentIndex = n;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[currentIndex].classList.add('active');
+            dots[currentIndex].classList.add('active');
+            
+            createHeart();
+        }
+
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '💕';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            heart.style.fontSize = (Math.random() * 2 + 2) + 'rem';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Initialize
+        generateLips();
+        
+        // Auto-play slides every 8 seconds
+        setInterval(() => {
+            nextSlide();
+        }, 8000);
+    </script>
+</body>
+</html>
